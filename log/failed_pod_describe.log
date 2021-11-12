@@ -1,0 +1,310 @@
+$ kubectl describe pod acctdev-pgc-kljx-0 -n finance
+Name:           acctdev-pgc-kljx-0
+Namespace:      finance
+Priority:       0
+Node:           jaxdock04/192.168.2.54
+Start Time:     Fri, 12 Nov 2021 09:59:48 -0500
+Labels:         controller-revision-hash=acctdev-pgc-kljx-77dc56cbb4
+                postgres-operator.crunchydata.com/cluster=acctdev
+                postgres-operator.crunchydata.com/crunchy-postgres-exporter=true
+                postgres-operator.crunchydata.com/data=postgres
+                postgres-operator.crunchydata.com/instance=acctdev-pgc-kljx
+                postgres-operator.crunchydata.com/instance-set=pgc
+                postgres-operator.crunchydata.com/patroni=acctdev-ha
+                statefulset.kubernetes.io/pod-name=acctdev-pgc-kljx-0
+Annotations:    <none>
+Status:         Pending
+IP:
+IPs:            <none>
+Controlled By:  StatefulSet/acctdev-pgc-kljx
+Init Containers:
+  postgres-startup:
+    Container ID:
+    Image:         registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.3-1
+    Image ID:
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      bash
+      -ceu
+      --
+      declare -r expected_major_version="$1" pgwal_directory="$2"
+      results() { printf '::postgres-operator: %s::%s\n' "$@"; }
+      safelink() (
+        local desired="$1" name="$2" current
+        current=$(realpath "${name}")
+        if [ "${current}" = "${desired}" ]; then return; fi
+        set -x; mv --no-target-directory "${current}" "${desired}"
+        ln --no-dereference --force --symbolic "${desired}" "${name}"
+      )
+      echo Initializing ...
+      results 'uid' "$(id -u)" 'gid' "$(id -G)"
+      results 'postgres path' "$(command -v postgres)"
+      results 'postgres version' "${postgres_version:=$(postgres --version)}"
+      [[ "${postgres_version}" == *") ${expected_major_version}."* ]]
+      results 'config directory' "${PGDATA:?}"
+      postgres_data_directory=$([ -d "${PGDATA}" ] && postgres -C data_directory || echo "${PGDATA}")
+      results 'data directory' "${postgres_data_directory}"
+      [ "${postgres_data_directory}" = "${PGDATA}" ]
+      bootstrap_dir="${postgres_data_directory}_bootstrap"
+      [ -d "${bootstrap_dir}" ] && results 'bootstrap directory' "${bootstrap_dir}"
+      [ -d "${bootstrap_dir}" ] && postgres_data_directory="${bootstrap_dir}"
+      install --directory --mode=0700 "${postgres_data_directory}"
+      install -D --mode=0600 -t "/tmp/replication" "/pgconf/tls/replication"/{tls.crt,tls.key,ca.crt}
+      [ -f "${postgres_data_directory}/PG_VERSION" ] || exit 0
+      results 'data version' "${postgres_data_version:=$(< "${postgres_data_directory}/PG_VERSION")}"
+      [ "${postgres_data_version}" = "${expected_major_version}" ]
+      safelink "${pgwal_directory}" "${postgres_data_directory}/pg_wal"
+      results 'wal directory' "$(realpath "${postgres_data_directory}/pg_wal")"
+      startup
+      13
+      /pgdata/pg13_wal
+    State:          Waiting
+      Reason:       PodInitializing
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     1
+      memory:  2Gi
+    Requests:
+      cpu:     1
+      memory:  2Gi
+    Environment:
+      PGDATA:  /pgdata/pg13
+      PGHOST:  /tmp/postgres
+      PGPORT:  5432
+    Mounts:
+      /pgconf/tls from cert-volume (ro)
+      /pgdata from postgres-data (rw)
+      /tmp from tmp (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-nk7rc (ro)
+  nss-wrapper-init:
+    Container ID:
+    Image:         registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.3-1
+    Image ID:
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      bash
+      -c
+      NSS_WRAPPER_SUBDIR=postgres CRUNCHY_NSS_USERNAME=postgres CRUNCHY_NSS_USER_DESC="postgres" /opt/crunchy/bin/nss_wrapper.sh
+    State:          Waiting
+      Reason:       PodInitializing
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     1
+      memory:  2Gi
+    Requests:
+      cpu:        1
+      memory:     2Gi
+    Environment:  <none>
+    Mounts:
+      /tmp from tmp (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-nk7rc (ro)
+Containers:
+  database:
+    Container ID:
+    Image:         registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.3-1
+    Image ID:
+    Port:          5432/TCP
+    Host Port:     0/TCP
+    Command:
+      patroni
+      /etc/patroni
+    State:          Waiting
+      Reason:       PodInitializing
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     1
+      memory:  2Gi
+    Requests:
+      cpu:      1
+      memory:   2Gi
+    Liveness:   http-get https://:8008/liveness delay=3s timeout=5s period=10s #success=1 #failure=3
+    Readiness:  http-get https://:8008/readiness delay=3s timeout=5s period=10s #success=1 #failure=3
+    Environment:
+      PGDATA:                              /pgdata/pg13
+      PGHOST:                              /tmp/postgres
+      PGPORT:                              5432
+      PATRONI_NAME:                        acctdev-pgc-kljx-0 (v1:metadata.name)
+      PATRONI_KUBERNETES_POD_IP:            (v1:status.podIP)
+      PATRONI_KUBERNETES_PORTS:            - name: postgres
+                                             port: 5432
+                                             protocol: TCP
+
+      PATRONI_POSTGRESQL_CONNECT_ADDRESS:  $(PATRONI_NAME).acctdev-pods:5432
+      PATRONI_POSTGRESQL_LISTEN:           *:5432
+      PATRONI_POSTGRESQL_CONFIG_DIR:       /pgdata/pg13
+      PATRONI_POSTGRESQL_DATA_DIR:         /pgdata/pg13
+      PATRONI_RESTAPI_CONNECT_ADDRESS:     $(PATRONI_NAME).acctdev-pods:8008
+      PATRONI_RESTAPI_LISTEN:              *:8008
+      PATRONICTL_CONFIG_FILE:              /etc/patroni
+      LD_PRELOAD:                          /usr/lib64/libnss_wrapper.so
+      NSS_WRAPPER_PASSWD:                  /tmp/nss_wrapper/postgres/passwd
+      NSS_WRAPPER_GROUP:                   /tmp/nss_wrapper/postgres/group
+    Mounts:
+      /dev/shm from dshm (rw)
+      /etc/patroni from patroni-config (ro)
+      /etc/pgbackrest/conf.d from pgbackrest-config (rw)
+      /etc/podinfo from podinfo (rw)
+      /etc/ssh from ssh (ro)
+      /pgconf/tls from cert-volume (ro)
+      /pgdata from postgres-data (rw)
+      /tmp from tmp (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-nk7rc (ro)
+  replication-cert-copy:
+    Container ID:
+    Image:         registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.3-1
+    Image ID:
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      bash
+      -ceu
+      --
+      monitor() {
+      declare -r directory="/pgconf/tls"
+      exec {fd}<> <(:)
+      while read -r -t 5 -u "${fd}" || true; do
+        if [ "${directory}" -nt "/proc/self/fd/${fd}" ] &&
+          install -D --mode=0600 -t "/tmp/replication" "${directory}"/{replication/tls.crt,replication/tls.key,replication/ca.crt} &&
+          pkill -HUP --exact --parent=1 postgres
+        then
+          exec {fd}>&- && exec {fd}<> <(:)
+          stat --format='Loaded certificates dated %y' "${directory}"
+        fi
+      done
+      }; export -f monitor; exec -a "$0" bash -ceu monitor
+      replication-cert-copy
+    State:          Waiting
+      Reason:       PodInitializing
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /pgconf/tls from cert-volume (ro)
+      /tmp from tmp (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-nk7rc (ro)
+  pgbackrest:
+    Container ID:
+    Image:         registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:centos8-2.33-0
+    Image ID:
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /usr/sbin/sshd
+      -D
+      -e
+    State:          Waiting
+      Reason:       PodInitializing
+    Ready:          False
+    Restart Count:  0
+    Liveness:       tcp-socket :2022 delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:
+      LD_PRELOAD:          /usr/lib64/libnss_wrapper.so
+      NSS_WRAPPER_PASSWD:  /tmp/nss_wrapper/postgres/passwd
+      NSS_WRAPPER_GROUP:   /tmp/nss_wrapper/postgres/group
+    Mounts:
+      /etc/pgbackrest/conf.d from pgbackrest-config (rw)
+      /etc/ssh from ssh (ro)
+      /pgdata from postgres-data (rw)
+      /tmp from tmp (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-nk7rc (ro)
+  exporter:
+    Container ID:
+    Image:         registry.developers.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.0.3-0
+    Image ID:
+    Port:          9187/TCP
+    Host Port:     0/TCP
+    Command:
+      /opt/cpm/bin/start.sh
+    State:          Waiting
+      Reason:       PodInitializing
+    Ready:          False
+    Restart Count:  0
+    Environment:
+      CONFIG_DIR:                           /opt/cpm/conf
+      POSTGRES_EXPORTER_PORT:               9187
+      PGBACKREST_INFO_THROTTLE_MINUTES:     10
+      PG_STAT_STATEMENTS_LIMIT:             20
+      PG_STAT_STATEMENTS_THROTTLE_MINUTES:  -1
+      EXPORTER_PG_HOST:                     localhost
+      EXPORTER_PG_PORT:                     5432
+      EXPORTER_PG_DATABASE:                 postgres
+      EXPORTER_PG_USER:                     ccp_monitoring
+      EXPORTER_PG_PASSWORD:                 <set to the key 'password' in secret 'acctdev-monitoring'>  Optional: false
+    Mounts:
+      /conf from exporter-config (rw)
+      /tmp from tmp (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-nk7rc (ro)
+Conditions:
+  Type              Status
+  Initialized       False
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  postgres-data:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  acctdev-pgc-kljx-pgdata
+    ReadOnly:   false
+  patroni-config:
+    Type:                Projected (a volume that contains injected data from multiple sources)
+    ConfigMapName:       acctdev-config
+    ConfigMapOptional:   <nil>
+    ConfigMapName:       acctdev-pgc-kljx-config
+    ConfigMapOptional:   <nil>
+    SecretName:          acctdev-pgc-kljx-certs
+    SecretOptionalName:  <nil>
+  ssh:
+    Type:                Projected (a volume that contains injected data from multiple sources)
+    ConfigMapName:       acctdev-ssh-config
+    ConfigMapOptional:   <nil>
+    SecretName:          acctdev-ssh
+    SecretOptionalName:  <nil>
+  pgbackrest-config:
+    Type:               Projected (a volume that contains injected data from multiple sources)
+    ConfigMapName:      acctdev-pgbackrest-config
+    ConfigMapOptional:  <nil>
+  exporter-config:
+    Type:  Projected (a volume that contains injected data from multiple sources)
+  podinfo:
+    Type:  DownwardAPI (a volume populated by information about the pod)
+    Items:
+      limits.cpu -> cpu_limit
+      requests.cpu -> cpu_request
+      limits.memory -> mem_limit
+      requests.memory -> mem_request
+      metadata.labels -> labels
+      metadata.annotations -> annotations
+  cert-volume:
+    Type:                Projected (a volume that contains injected data from multiple sources)
+    SecretName:          acctdev-cluster-cert
+    SecretOptionalName:  <nil>
+    SecretName:          acctdev-replication-cert
+    SecretOptionalName:  <nil>
+  tmp:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:
+    SizeLimit:  16Mi
+  dshm:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     Memory
+    SizeLimit:  <unset>
+  acctdev-instance-token-nk7rc:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  acctdev-instance-token-nk7rc
+    Optional:    false
+QoS Class:       Burstable
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason       Age                From               Message
+  ----     ------       ----               ----               -------
+  Normal   Scheduled    90s                default-scheduler  Successfully assigned finance/acctdev-pgc-kljx-0 to jaxdock04
+  Warning  FailedMount  25s (x8 over 89s)  kubelet            MountVolume.SetUp failed for volume "pgbackrest-config" : configmap references non-existent config key: pgbackrest_instance.conf
+  Warning  FailedMount  25s (x8 over 89s)  kubelet            MountVolume.SetUp failed for volume "ssh" : [configmap "acctdev-ssh-config" not found, secret "acctdev-ssh" not found]
+

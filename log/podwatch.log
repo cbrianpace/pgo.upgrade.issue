@@ -1,0 +1,22 @@
+$ kc get pod -n finance -w
+NAME                        READY   STATUS      RESTARTS   AGE
+acctdev-backup-jcnp-shd57   0/1     Completed   0          3m5s
+acctdev-pgc-hcp8-0          4/4     Running     0          3m42s
+acctdev-pgc-kljx-0          4/4     Running     0          3m43s
+acctdev-repo-host-0         1/1     Running     0          3m42s
+acctdev-pgc-kljx-0          4/4     Running     0          4m23s
+acctdev-pgc-kljx-0          4/4     Terminating   0          4m24s
+acctdev-pgc-kljx-0          4/4     Terminating   0          4m25s
+acctdev-pgc-kljx-0          4/4     Terminating   0          4m25s
+acctdev-pgc-kljx-0          0/4     Terminating   0          4m26s
+acctdev-pgc-kljx-0          0/4     Terminating   0          4m27s
+acctdev-pgc-kljx-0          0/4     Terminating   0          4m27s
+acctdev-pgc-kljx-0          0/4     Pending       0          0s
+acctdev-pgc-kljx-0          0/4     Pending       0          0s
+acctdev-pgc-kljx-0          0/4     Init:0/2      0          1s
+acctdev-pgc-hcp8-0          4/4     Running       0          4m31s
+acctdev-pgc-hcp8-0          4/4     Running       0          4m41s
+acctdev-pgc-hcp8-0          4/4     Running       0          4m51s
+acctdev-pgc-hcp8-0          4/4     Running       0          5m1s
+acctdev-pgc-hcp8-0          4/4     Running       0          5m11s
+
