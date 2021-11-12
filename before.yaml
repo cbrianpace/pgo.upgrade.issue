@@ -1,0 +1,1052 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  creationTimestamp: "2021-11-12T17:04:50Z"
+  generation: 1
+  labels:
+    postgres-operator.crunchydata.com/cluster: acctdev
+    postgres-operator.crunchydata.com/instance: acctdev-pgc-ll72
+    postgres-operator.crunchydata.com/instance-set: pgc
+  managedFields:
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:labels:
+          f:postgres-operator.crunchydata.com/cluster: {}
+          f:postgres-operator.crunchydata.com/instance: {}
+          f:postgres-operator.crunchydata.com/instance-set: {}
+        f:ownerReferences:
+          k:{"uid":"86c62f2b-fb2e-486c-b288-09c5fe497d8d"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:replicas: {}
+        f:revisionHistoryLimit: {}
+        f:selector: {}
+        f:serviceName: {}
+        f:template:
+          f:metadata:
+            f:labels:
+              f:postgres-operator.crunchydata.com/cluster: {}
+              f:postgres-operator.crunchydata.com/crunchy-postgres-exporter: {}
+              f:postgres-operator.crunchydata.com/instance: {}
+              f:postgres-operator.crunchydata.com/instance-set: {}
+              f:postgres-operator.crunchydata.com/patroni: {}
+          f:spec:
+            f:containers:
+              k:{"name":"database"}:
+                .: {}
+                f:command: {}
+                f:env:
+                  k:{"name":"LD_PRELOAD"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"NSS_WRAPPER_GROUP"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"NSS_WRAPPER_PASSWD"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PATRONI_KUBERNETES_POD_IP"}:
+                    .: {}
+                    f:name: {}
+                    f:valueFrom:
+                      f:fieldRef:
+                        f:apiVersion: {}
+                        f:fieldPath: {}
+                  k:{"name":"PATRONI_KUBERNETES_PORTS"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PATRONI_NAME"}:
+                    .: {}
+                    f:name: {}
+                    f:valueFrom:
+                      f:fieldRef:
+                        f:apiVersion: {}
+                        f:fieldPath: {}
+                  k:{"name":"PATRONI_POSTGRESQL_CONFIG_DIR"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PATRONI_POSTGRESQL_CONNECT_ADDRESS"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PATRONI_POSTGRESQL_DATA_DIR"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PATRONI_POSTGRESQL_LISTEN"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PATRONI_RESTAPI_CONNECT_ADDRESS"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PATRONI_RESTAPI_LISTEN"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PATRONICTL_CONFIG_FILE"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PGDATA"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PGHOST"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PGPORT"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                f:image: {}
+                f:livenessProbe:
+                  f:failureThreshold: {}
+                  f:httpGet:
+                    f:path: {}
+                    f:port: {}
+                    f:scheme: {}
+                  f:initialDelaySeconds: {}
+                  f:periodSeconds: {}
+                  f:successThreshold: {}
+                  f:timeoutSeconds: {}
+                f:name: {}
+                f:ports:
+                  k:{"containerPort":5432,"protocol":"TCP"}:
+                    .: {}
+                    f:containerPort: {}
+                    f:name: {}
+                    f:protocol: {}
+                f:readinessProbe:
+                  f:failureThreshold: {}
+                  f:httpGet:
+                    f:path: {}
+                    f:port: {}
+                    f:scheme: {}
+                  f:initialDelaySeconds: {}
+                  f:periodSeconds: {}
+                  f:successThreshold: {}
+                  f:timeoutSeconds: {}
+                f:resources:
+                  f:limits:
+                    f:cpu: {}
+                    f:memory: {}
+                f:securityContext:
+                  f:allowPrivilegeEscalation: {}
+                  f:privileged: {}
+                  f:readOnlyRootFilesystem: {}
+                  f:runAsNonRoot: {}
+                f:volumeMounts:
+                  k:{"mountPath":"/etc/patroni"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                    f:readOnly: {}
+                  k:{"mountPath":"/etc/pgbackrest/conf.d"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                  k:{"mountPath":"/etc/podinfo"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                  k:{"mountPath":"/etc/ssh"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                    f:readOnly: {}
+                  k:{"mountPath":"/pgconf/tls"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                    f:readOnly: {}
+                  k:{"mountPath":"/pgdata"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                  k:{"mountPath":"/tmp"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+              k:{"name":"exporter"}:
+                .: {}
+                f:command: {}
+                f:env:
+                  k:{"name":"CONFIG_DIR"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"EXPORTER_PG_DATABASE"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"EXPORTER_PG_HOST"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"EXPORTER_PG_PASSWORD"}:
+                    .: {}
+                    f:name: {}
+                    f:valueFrom:
+                      f:secretKeyRef:
+                        f:key: {}
+                        f:name: {}
+                  k:{"name":"EXPORTER_PG_PORT"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"EXPORTER_PG_USER"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PG_STAT_STATEMENTS_LIMIT"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PG_STAT_STATEMENTS_THROTTLE_MINUTES"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PGBACKREST_INFO_THROTTLE_MINUTES"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"POSTGRES_EXPORTER_PORT"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                f:image: {}
+                f:name: {}
+                f:ports:
+                  k:{"containerPort":9187,"protocol":"TCP"}:
+                    .: {}
+                    f:containerPort: {}
+                    f:name: {}
+                    f:protocol: {}
+                f:resources: {}
+                f:securityContext:
+                  f:allowPrivilegeEscalation: {}
+                  f:privileged: {}
+                  f:readOnlyRootFilesystem: {}
+                  f:runAsNonRoot: {}
+                f:volumeMounts:
+                  k:{"mountPath":"/conf"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                  k:{"mountPath":"/tmp"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+              k:{"name":"pgbackrest"}:
+                .: {}
+                f:command: {}
+                f:env:
+                  k:{"name":"LD_PRELOAD"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"NSS_WRAPPER_GROUP"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"NSS_WRAPPER_PASSWD"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                f:image: {}
+                f:livenessProbe:
+                  f:tcpSocket:
+                    f:port: {}
+                f:name: {}
+                f:resources: {}
+                f:securityContext:
+                  f:allowPrivilegeEscalation: {}
+                  f:privileged: {}
+                  f:readOnlyRootFilesystem: {}
+                  f:runAsNonRoot: {}
+                f:volumeMounts:
+                  k:{"mountPath":"/etc/pgbackrest/conf.d"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                  k:{"mountPath":"/etc/ssh"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                    f:readOnly: {}
+                  k:{"mountPath":"/pgdata"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                  k:{"mountPath":"/tmp"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+              k:{"name":"replication-cert-copy"}:
+                .: {}
+                f:command: {}
+                f:env:
+                  k:{"name":"PATRONI_KUBERNETES_POD_IP"}:
+                    .: {}
+                    f:name: {}
+                    f:valueFrom:
+                      f:fieldRef:
+                        f:apiVersion: {}
+                        f:fieldPath: {}
+                  k:{"name":"PATRONI_KUBERNETES_PORTS"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PATRONI_NAME"}:
+                    .: {}
+                    f:name: {}
+                    f:valueFrom:
+                      f:fieldRef:
+                        f:apiVersion: {}
+                        f:fieldPath: {}
+                  k:{"name":"PATRONI_POSTGRESQL_CONFIG_DIR"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PATRONI_POSTGRESQL_CONNECT_ADDRESS"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PATRONI_POSTGRESQL_DATA_DIR"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PATRONI_POSTGRESQL_LISTEN"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PATRONI_RESTAPI_CONNECT_ADDRESS"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PATRONI_RESTAPI_LISTEN"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PATRONICTL_CONFIG_FILE"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PGDATA"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PGHOST"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PGPORT"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                f:image: {}
+                f:name: {}
+                f:resources: {}
+                f:securityContext:
+                  f:allowPrivilegeEscalation: {}
+                  f:privileged: {}
+                  f:readOnlyRootFilesystem: {}
+                  f:runAsNonRoot: {}
+                f:volumeMounts:
+                  k:{"mountPath":"/etc/patroni"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                    f:readOnly: {}
+                  k:{"mountPath":"/pgconf/tls"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                    f:readOnly: {}
+                  k:{"mountPath":"/tmp"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+            f:initContainers:
+              k:{"name":"database-client-cert-init"}:
+                .: {}
+                f:command: {}
+                f:image: {}
+                f:name: {}
+                f:resources: {}
+                f:securityContext:
+                  f:allowPrivilegeEscalation: {}
+                  f:privileged: {}
+                  f:readOnlyRootFilesystem: {}
+                  f:runAsNonRoot: {}
+                f:volumeMounts:
+                  k:{"mountPath":"/pgconf/tls"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                    f:readOnly: {}
+                  k:{"mountPath":"/tmp"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+              k:{"name":"nss-wrapper-init"}:
+                .: {}
+                f:command: {}
+                f:image: {}
+                f:name: {}
+                f:resources: {}
+                f:securityContext:
+                  f:allowPrivilegeEscalation: {}
+                  f:privileged: {}
+                  f:readOnlyRootFilesystem: {}
+                  f:runAsNonRoot: {}
+                f:volumeMounts:
+                  k:{"mountPath":"/tmp"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+              k:{"name":"postgres-startup"}:
+                .: {}
+                f:command: {}
+                f:env:
+                  k:{"name":"PGDATA"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PGHOST"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"PGPORT"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                f:image: {}
+                f:name: {}
+                f:resources:
+                  f:limits:
+                    f:cpu: {}
+                    f:memory: {}
+                f:securityContext:
+                  f:allowPrivilegeEscalation: {}
+                  f:privileged: {}
+                  f:readOnlyRootFilesystem: {}
+                  f:runAsNonRoot: {}
+                f:volumeMounts:
+                  k:{"mountPath":"/pgdata"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                  k:{"mountPath":"/tmp"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+            f:restartPolicy: {}
+            f:securityContext:
+              f:fsGroup: {}
+              f:runAsNonRoot: {}
+              f:supplementalGroups: {}
+            f:serviceAccountName: {}
+            f:shareProcessNamespace: {}
+            f:volumes:
+              k:{"name":"cert-volume"}:
+                .: {}
+                f:name: {}
+                f:projected:
+                  f:defaultMode: {}
+                  f:sources: {}
+              k:{"name":"exporter-config"}:
+                .: {}
+                f:name: {}
+                f:projected:
+                  f:sources: {}
+              k:{"name":"patroni-config"}:
+                .: {}
+                f:name: {}
+                f:projected:
+                  f:sources: {}
+              k:{"name":"pgbackrest-config"}:
+                .: {}
+                f:name: {}
+                f:projected:
+                  f:sources: {}
+              k:{"name":"podinfo"}:
+                .: {}
+                f:downwardAPI:
+                  f:items: {}
+                f:name: {}
+              k:{"name":"postgres-data"}:
+                .: {}
+                f:name: {}
+                f:persistentVolumeClaim:
+                  f:claimName: {}
+              k:{"name":"ssh"}:
+                .: {}
+                f:name: {}
+                f:projected:
+                  f:defaultMode: {}
+                  f:sources: {}
+              k:{"name":"tmp"}:
+                .: {}
+                f:emptyDir:
+                  f:sizeLimit: {}
+                f:name: {}
+        f:updateStrategy:
+          f:type: {}
+    manager: postgrescluster-controller
+    operation: Apply
+    time: "2021-11-12T17:04:50Z"
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:collisionCount: {}
+        f:currentReplicas: {}
+        f:currentRevision: {}
+        f:observedGeneration: {}
+        f:readyReplicas: {}
+        f:replicas: {}
+        f:updateRevision: {}
+        f:updatedReplicas: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2021-11-12T17:05:25Z"
+  name: acctdev-pgc-ll72
+  namespace: finance
+  ownerReferences:
+  - apiVersion: postgres-operator.crunchydata.com/v1beta1
+    blockOwnerDeletion: true
+    controller: true
+    kind: PostgresCluster
+    name: acctdev
+    uid: 86c62f2b-fb2e-486c-b288-09c5fe497d8d
+  resourceVersion: "26323767"
+  uid: 6f77994b-265e-4556-8342-d0748bc52c2e
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      postgres-operator.crunchydata.com/cluster: acctdev
+      postgres-operator.crunchydata.com/instance: acctdev-pgc-ll72
+      postgres-operator.crunchydata.com/instance-set: pgc
+  serviceName: acctdev-pods
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        postgres-operator.crunchydata.com/cluster: acctdev
+        postgres-operator.crunchydata.com/crunchy-postgres-exporter: "true"
+        postgres-operator.crunchydata.com/instance: acctdev-pgc-ll72
+        postgres-operator.crunchydata.com/instance-set: pgc
+        postgres-operator.crunchydata.com/patroni: acctdev-ha
+    spec:
+      containers:
+      - command:
+        - patroni
+        - /etc/patroni
+        env:
+        - name: PGDATA
+          value: /pgdata/pg13
+        - name: PGHOST
+          value: /tmp/postgres
+        - name: PGPORT
+          value: "5432"
+        - name: PATRONI_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: PATRONI_KUBERNETES_POD_IP
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.podIP
+        - name: PATRONI_KUBERNETES_PORTS
+          value: |
+            - name: postgres
+              port: 5432
+              protocol: TCP
+        - name: PATRONI_POSTGRESQL_CONNECT_ADDRESS
+          value: $(PATRONI_NAME).acctdev-pods:5432
+        - name: PATRONI_POSTGRESQL_LISTEN
+          value: '*:5432'
+        - name: PATRONI_POSTGRESQL_CONFIG_DIR
+          value: /pgdata/pg13
+        - name: PATRONI_POSTGRESQL_DATA_DIR
+          value: /pgdata/pg13
+        - name: PATRONI_RESTAPI_CONNECT_ADDRESS
+          value: $(PATRONI_NAME).acctdev-pods:8008
+        - name: PATRONI_RESTAPI_LISTEN
+          value: '*:8008'
+        - name: PATRONICTL_CONFIG_FILE
+          value: /etc/patroni
+        - name: LD_PRELOAD
+          value: /usr/lib64/libnss_wrapper.so
+        - name: NSS_WRAPPER_PASSWD
+          value: /tmp/nss_wrapper/postgres/passwd
+        - name: NSS_WRAPPER_GROUP
+          value: /tmp/nss_wrapper/postgres/group
+        image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.3-1
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /liveness
+            port: 8008
+            scheme: HTTPS
+          initialDelaySeconds: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        name: database
+        ports:
+        - containerPort: 5432
+          name: postgres
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /readiness
+            port: 8008
+            scheme: HTTPS
+          initialDelaySeconds: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: "1"
+            memory: 2Gi
+        securityContext:
+          allowPrivilegeEscalation: false
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /pgdata
+          name: postgres-data
+        - mountPath: /etc/patroni
+          name: patroni-config
+          readOnly: true
+        - mountPath: /etc/ssh
+          name: ssh
+          readOnly: true
+        - mountPath: /etc/pgbackrest/conf.d
+          name: pgbackrest-config
+        - mountPath: /etc/podinfo
+          name: podinfo
+        - mountPath: /pgconf/tls
+          name: cert-volume
+          readOnly: true
+        - mountPath: /tmp
+          name: tmp
+      - command:
+        - bash
+        - -c
+        - |2
+
+          declare -r mountDir=/pgconf/tls/replication
+          declare -r tmpDir=/tmp/replication
+          while sleep 5s; do
+            mkdir -p /tmp/replication
+            DIFF=$(diff ${mountDir} ${tmpDir})
+            if [ "$DIFF" != "" ]
+            then
+              date
+              echo Copying replication certificates and key and setting permissions
+              install -m 0600 ${mountDir}/{tls.crt,tls.key,ca.crt} ${tmpDir}
+              patronictl reload acctdev-ha --force
+            fi
+          done
+        env:
+        - name: PGDATA
+          value: /pgdata/pg13
+        - name: PGHOST
+          value: /tmp/postgres
+        - name: PGPORT
+          value: "5432"
+        - name: PATRONI_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: PATRONI_KUBERNETES_POD_IP
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.podIP
+        - name: PATRONI_KUBERNETES_PORTS
+          value: |
+            - name: postgres
+              port: 5432
+              protocol: TCP
+        - name: PATRONI_POSTGRESQL_CONNECT_ADDRESS
+          value: $(PATRONI_NAME).acctdev-pods:5432
+        - name: PATRONI_POSTGRESQL_LISTEN
+          value: '*:5432'
+        - name: PATRONI_POSTGRESQL_CONFIG_DIR
+          value: /pgdata/pg13
+        - name: PATRONI_POSTGRESQL_DATA_DIR
+          value: /pgdata/pg13
+        - name: PATRONI_RESTAPI_CONNECT_ADDRESS
+          value: $(PATRONI_NAME).acctdev-pods:8008
+        - name: PATRONI_RESTAPI_LISTEN
+          value: '*:8008'
+        - name: PATRONICTL_CONFIG_FILE
+          value: /etc/patroni
+        image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.3-1
+        imagePullPolicy: IfNotPresent
+        name: replication-cert-copy
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/patroni
+          name: patroni-config
+          readOnly: true
+        - mountPath: /pgconf/tls
+          name: cert-volume
+          readOnly: true
+        - mountPath: /tmp
+          name: tmp
+      - command:
+        - /usr/sbin/sshd
+        - -D
+        - -e
+        env:
+        - name: LD_PRELOAD
+          value: /usr/lib64/libnss_wrapper.so
+        - name: NSS_WRAPPER_PASSWD
+          value: /tmp/nss_wrapper/postgres/passwd
+        - name: NSS_WRAPPER_GROUP
+          value: /tmp/nss_wrapper/postgres/group
+        image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:centos8-2.33-0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 2022
+          timeoutSeconds: 1
+        name: pgbackrest
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/ssh
+          name: ssh
+          readOnly: true
+        - mountPath: /pgdata
+          name: postgres-data
+        - mountPath: /etc/pgbackrest/conf.d
+          name: pgbackrest-config
+        - mountPath: /tmp
+          name: tmp
+      - command:
+        - /opt/cpm/bin/start.sh
+        env:
+        - name: CONFIG_DIR
+          value: /opt/cpm/conf
+        - name: POSTGRES_EXPORTER_PORT
+          value: "9187"
+        - name: PGBACKREST_INFO_THROTTLE_MINUTES
+          value: "10"
+        - name: PG_STAT_STATEMENTS_LIMIT
+          value: "20"
+        - name: PG_STAT_STATEMENTS_THROTTLE_MINUTES
+          value: "-1"
+        - name: EXPORTER_PG_HOST
+          value: localhost
+        - name: EXPORTER_PG_PORT
+          value: "5432"
+        - name: EXPORTER_PG_DATABASE
+          value: postgres
+        - name: EXPORTER_PG_USER
+          value: ccp_monitoring
+        - name: EXPORTER_PG_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: acctdev-monitoring
+        image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.0.3-0
+        imagePullPolicy: IfNotPresent
+        name: exporter
+        ports:
+        - containerPort: 9187
+          name: exporter
+          protocol: TCP
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /conf
+          name: exporter-config
+        - mountPath: /tmp
+          name: tmp
+      dnsPolicy: ClusterFirst
+      initContainers:
+      - command:
+        - bash
+        - -ceu
+        - --
+        - |-
+          declare -r expected_major_version="$1" pgwal_directory="$2"
+          results() { printf '::postgres-operator: %s::%s\n' "$@"; }
+          safelink() (
+            local desired="$1" name="$2" current
+            current=$(realpath "${name}")
+            if [ "${current}" = "${desired}" ]; then return; fi
+            set -x; mv --no-target-directory "${current}" "${desired}"
+            ln --no-dereference --force --symbolic "${desired}" "${name}"
+          )
+          echo Initializing ...
+          results 'uid' "$(id -u)" 'gid' "$(id -G)"
+          results 'postgres path' "$(command -v postgres)"
+          results 'postgres version' "${postgres_version:=$(postgres --version)}"
+          [[ "${postgres_version}" == *") ${expected_major_version}."* ]]
+          results 'config directory' "${PGDATA:?}"
+          postgres_data_directory=$([ -d "${PGDATA}" ] && postgres -C data_directory || echo "${PGDATA}")
+          results 'data directory' "${postgres_data_directory}"
+          [ "${postgres_data_directory}" = "${PGDATA}" ]
+          bootstrap_dir="${postgres_data_directory}_bootstrap"
+          [ -d "${bootstrap_dir}" ] && results 'bootstrap directory' "${bootstrap_dir}"
+          [ -d "${bootstrap_dir}" ] && postgres_data_directory="${bootstrap_dir}"
+          install --directory --mode=0700 "${postgres_data_directory}"
+          [ -f "${postgres_data_directory}/PG_VERSION" ] || exit 0
+          results 'data version' "${postgres_data_version:=$(< "${postgres_data_directory}/PG_VERSION")}"
+          [ "${postgres_data_version}" = "${expected_major_version}" ]
+          safelink "${pgwal_directory}" "${postgres_data_directory}/pg_wal"
+          results 'wal directory' "$(realpath "${postgres_data_directory}/pg_wal")"
+        - startup
+        - "13"
+        - /pgdata/pg13_wal
+        env:
+        - name: PGDATA
+          value: /pgdata/pg13
+        - name: PGHOST
+          value: /tmp/postgres
+        - name: PGPORT
+          value: "5432"
+        image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.3-1
+        imagePullPolicy: IfNotPresent
+        name: postgres-startup
+        resources:
+          limits:
+            cpu: "1"
+            memory: 2Gi
+        securityContext:
+          allowPrivilegeEscalation: false
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /pgdata
+          name: postgres-data
+        - mountPath: /tmp
+          name: tmp
+      - command:
+        - bash
+        - -c
+        - mkdir -p /tmp/replication && install -m 0600 /pgconf/tls/replication/{tls.crt,tls.key,ca.crt}
+          /tmp/replication
+        image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.3-1
+        imagePullPolicy: IfNotPresent
+        name: database-client-cert-init
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /pgconf/tls
+          name: cert-volume
+          readOnly: true
+        - mountPath: /tmp
+          name: tmp
+      - command:
+        - bash
+        - -c
+        - NSS_WRAPPER_SUBDIR=postgres CRUNCHY_NSS_USERNAME=postgres CRUNCHY_NSS_USER_DESC="postgres"
+          /opt/crunchy/bin/nss_wrapper.sh
+        image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.3-1
+        imagePullPolicy: IfNotPresent
+        name: nss-wrapper-init
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 26
+        runAsNonRoot: true
+        supplementalGroups:
+        - 65534
+      serviceAccount: acctdev-instance
+      serviceAccountName: acctdev-instance
+      shareProcessNamespace: true
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: postgres-data
+        persistentVolumeClaim:
+          claimName: acctdev-pgc-ll72-pgdata
+      - name: patroni-config
+        projected:
+          defaultMode: 420
+          sources:
+          - configMap:
+              items:
+              - key: patroni.yaml
+                path: ~postgres-operator_cluster.yaml
+              name: acctdev-config
+          - configMap:
+              items:
+              - key: patroni.yaml
+                path: ~postgres-operator_instance.yaml
+              name: acctdev-pgc-ll72-config
+          - secret:
+              items:
+              - key: patroni.ca-roots
+                path: ~postgres-operator/patroni.ca-roots
+              - key: patroni.crt-combined
+                path: ~postgres-operator/patroni.crt+key
+              name: acctdev-pgc-ll72-certs
+      - name: ssh
+        projected:
+          defaultMode: 32
+          sources:
+          - configMap:
+              name: acctdev-ssh-config
+          - secret:
+              name: acctdev-ssh
+      - name: pgbackrest-config
+        projected:
+          defaultMode: 420
+          sources:
+          - configMap:
+              items:
+              - key: acctdev-pgc-ll72.conf
+                path: acctdev-pgc-ll72.conf
+              - key: config-hash
+                path: config-hash
+              name: acctdev-pgbackrest-config
+      - name: exporter-config
+        projected:
+          defaultMode: 420
+          sources: null
+      - downwardAPI:
+          defaultMode: 420
+          items:
+          - path: cpu_limit
+            resourceFieldRef:
+              containerName: database
+              divisor: 1m
+              resource: limits.cpu
+          - path: cpu_request
+            resourceFieldRef:
+              containerName: database
+              divisor: 1m
+              resource: requests.cpu
+          - path: mem_limit
+            resourceFieldRef:
+              containerName: database
+              divisor: 1Mi
+              resource: limits.memory
+          - path: mem_request
+            resourceFieldRef:
+              containerName: database
+              divisor: 1Mi
+              resource: requests.memory
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels
+            path: labels
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.annotations
+            path: annotations
+        name: podinfo
+      - name: cert-volume
+        projected:
+          defaultMode: 384
+          sources:
+          - secret:
+              items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+              - key: ca.crt
+                path: ca.crt
+              name: acctdev-cluster-cert
+          - secret:
+              items:
+              - key: tls.crt
+                path: replication/tls.crt
+              - key: tls.key
+                path: replication/tls.key
+              - key: ca.crt
+                path: replication/ca.crt
+              name: acctdev-replication-cert
+      - emptyDir:
+          sizeLimit: 16Mi
+        name: tmp
+  updateStrategy:
+    type: OnDelete
+status:
+  collisionCount: 0
+  currentReplicas: 1
+  currentRevision: acctdev-pgc-ll72-8fb6d8c68
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updateRevision: acctdev-pgc-ll72-8fb6d8c68
+  updatedReplicas: 1
