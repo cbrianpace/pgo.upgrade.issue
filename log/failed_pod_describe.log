@@ -1,27 +1,26 @@
-$ kubectl describe pod acctdev-pgc-kljx-0 -n finance
-Name:           acctdev-pgc-kljx-0
+Name:           acctdev-pgc-5fq4-0
 Namespace:      finance
 Priority:       0
-Node:           jaxdock04/192.168.2.54
-Start Time:     Fri, 12 Nov 2021 09:59:48 -0500
-Labels:         controller-revision-hash=acctdev-pgc-kljx-77dc56cbb4
+Node:           jaxdock02/192.168.2.52
+Start Time:     Fri, 12 Nov 2021 11:21:07 -0500
+Labels:         controller-revision-hash=acctdev-pgc-5fq4-6bc86d4774
                 postgres-operator.crunchydata.com/cluster=acctdev
                 postgres-operator.crunchydata.com/crunchy-postgres-exporter=true
                 postgres-operator.crunchydata.com/data=postgres
-                postgres-operator.crunchydata.com/instance=acctdev-pgc-kljx
+                postgres-operator.crunchydata.com/instance=acctdev-pgc-5fq4
                 postgres-operator.crunchydata.com/instance-set=pgc
                 postgres-operator.crunchydata.com/patroni=acctdev-ha
-                statefulset.kubernetes.io/pod-name=acctdev-pgc-kljx-0
+                statefulset.kubernetes.io/pod-name=acctdev-pgc-5fq4-0
 Annotations:    <none>
 Status:         Pending
-IP:
+IP:             
 IPs:            <none>
-Controlled By:  StatefulSet/acctdev-pgc-kljx
+Controlled By:  StatefulSet/acctdev-pgc-5fq4
 Init Containers:
   postgres-startup:
-    Container ID:
+    Container ID:  
     Image:         registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.3-1
-    Image ID:
+    Image ID:      
     Port:          <none>
     Host Port:     <none>
     Command:
@@ -77,11 +76,11 @@ Init Containers:
       /pgconf/tls from cert-volume (ro)
       /pgdata from postgres-data (rw)
       /tmp from tmp (rw)
-      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-nk7rc (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-lv68w (ro)
   nss-wrapper-init:
-    Container ID:
+    Container ID:  
     Image:         registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.3-1
-    Image ID:
+    Image ID:      
     Port:          <none>
     Host Port:     <none>
     Command:
@@ -101,12 +100,12 @@ Init Containers:
     Environment:  <none>
     Mounts:
       /tmp from tmp (rw)
-      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-nk7rc (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-lv68w (ro)
 Containers:
   database:
-    Container ID:
+    Container ID:  
     Image:         registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.3-1
-    Image ID:
+    Image ID:      
     Port:          5432/TCP
     Host Port:     0/TCP
     Command:
@@ -128,12 +127,12 @@ Containers:
       PGDATA:                              /pgdata/pg13
       PGHOST:                              /tmp/postgres
       PGPORT:                              5432
-      PATRONI_NAME:                        acctdev-pgc-kljx-0 (v1:metadata.name)
+      PATRONI_NAME:                        acctdev-pgc-5fq4-0 (v1:metadata.name)
       PATRONI_KUBERNETES_POD_IP:            (v1:status.podIP)
       PATRONI_KUBERNETES_PORTS:            - name: postgres
                                              port: 5432
                                              protocol: TCP
-
+                                           
       PATRONI_POSTGRESQL_CONNECT_ADDRESS:  $(PATRONI_NAME).acctdev-pods:5432
       PATRONI_POSTGRESQL_LISTEN:           *:5432
       PATRONI_POSTGRESQL_CONFIG_DIR:       /pgdata/pg13
@@ -153,11 +152,11 @@ Containers:
       /pgconf/tls from cert-volume (ro)
       /pgdata from postgres-data (rw)
       /tmp from tmp (rw)
-      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-nk7rc (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-lv68w (ro)
   replication-cert-copy:
-    Container ID:
+    Container ID:  
     Image:         registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.3-1
-    Image ID:
+    Image ID:      
     Port:          <none>
     Host Port:     <none>
     Command:
@@ -186,11 +185,11 @@ Containers:
     Mounts:
       /pgconf/tls from cert-volume (ro)
       /tmp from tmp (rw)
-      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-nk7rc (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-lv68w (ro)
   pgbackrest:
-    Container ID:
+    Container ID:  
     Image:         registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:centos8-2.33-0
-    Image ID:
+    Image ID:      
     Port:          <none>
     Host Port:     <none>
     Command:
@@ -211,11 +210,11 @@ Containers:
       /etc/ssh from ssh (ro)
       /pgdata from postgres-data (rw)
       /tmp from tmp (rw)
-      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-nk7rc (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-lv68w (ro)
   exporter:
-    Container ID:
+    Container ID:  
     Image:         registry.developers.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.0.3-0
-    Image ID:
+    Image ID:      
     Port:          9187/TCP
     Host Port:     0/TCP
     Command:
@@ -238,25 +237,25 @@ Containers:
     Mounts:
       /conf from exporter-config (rw)
       /tmp from tmp (rw)
-      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-nk7rc (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from acctdev-instance-token-lv68w (ro)
 Conditions:
   Type              Status
-  Initialized       False
-  Ready             False
-  ContainersReady   False
-  PodScheduled      True
+  Initialized       False 
+  Ready             False 
+  ContainersReady   False 
+  PodScheduled      True 
 Volumes:
   postgres-data:
     Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
-    ClaimName:  acctdev-pgc-kljx-pgdata
+    ClaimName:  acctdev-pgc-5fq4-pgdata
     ReadOnly:   false
   patroni-config:
     Type:                Projected (a volume that contains injected data from multiple sources)
     ConfigMapName:       acctdev-config
     ConfigMapOptional:   <nil>
-    ConfigMapName:       acctdev-pgc-kljx-config
+    ConfigMapName:       acctdev-pgc-5fq4-config
     ConfigMapOptional:   <nil>
-    SecretName:          acctdev-pgc-kljx-certs
+    SecretName:          acctdev-pgc-5fq4-certs
     SecretOptionalName:  <nil>
   ssh:
     Type:                Projected (a volume that contains injected data from multiple sources)
@@ -287,24 +286,23 @@ Volumes:
     SecretOptionalName:  <nil>
   tmp:
     Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
-    Medium:
+    Medium:     
     SizeLimit:  16Mi
   dshm:
     Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
     Medium:     Memory
     SizeLimit:  <unset>
-  acctdev-instance-token-nk7rc:
+  acctdev-instance-token-lv68w:
     Type:        Secret (a volume populated by a Secret)
-    SecretName:  acctdev-instance-token-nk7rc
+    SecretName:  acctdev-instance-token-lv68w
     Optional:    false
 QoS Class:       Burstable
 Node-Selectors:  <none>
 Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
                  node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
 Events:
-  Type     Reason       Age                From               Message
-  ----     ------       ----               ----               -------
-  Normal   Scheduled    90s                default-scheduler  Successfully assigned finance/acctdev-pgc-kljx-0 to jaxdock04
-  Warning  FailedMount  25s (x8 over 89s)  kubelet            MountVolume.SetUp failed for volume "pgbackrest-config" : configmap references non-existent config key: pgbackrest_instance.conf
-  Warning  FailedMount  25s (x8 over 89s)  kubelet            MountVolume.SetUp failed for volume "ssh" : [configmap "acctdev-ssh-config" not found, secret "acctdev-ssh" not found]
-
+  Type     Reason       Age                 From               Message
+  ----     ------       ----                ----               -------
+  Normal   Scheduled    102s                default-scheduler  Successfully assigned finance/acctdev-pgc-5fq4-0 to jaxdock02
+  Warning  FailedMount  36s (x8 over 100s)  kubelet            MountVolume.SetUp failed for volume "ssh" : [configmap "acctdev-ssh-config" not found, secret "acctdev-ssh" not found]
+  Warning  FailedMount  36s (x8 over 100s)  kubelet            MountVolume.SetUp failed for volume "pgbackrest-config" : configmap references non-existent config key: pgbackrest_instance.conf
